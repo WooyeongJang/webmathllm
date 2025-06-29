@@ -1,0 +1,30 @@
+{
+  "name": "tinymath-llm",
+  "version": "1.0.0",
+  "description": "WebLLM을 사용한 브라우저 기반 수학 계산기입니다. TinyMath Q4 모델을 활용하여 로컬에서 수학 문제를 해결합니다.",
+  "main": "script.js",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "npx serve .",
+    "dev": "npx serve . --listen 8000",
+    "validate": "echo \"Validating project structure...\" && node scripts/validate.js",
+    "lint:css": "echo \"CSS validation - 향후 stylelint 추가 예정\"",
+    "lint:html": "echo \"HTML validation - 향후 html-validate 추가 예정\"",
+    "test": "echo \"브라우저에서 http://localhost:8000 접속 후 개발자 콘솔에서 runSystemTest() 실행\"",
+    "test:performance": "echo \"브라우저에서 getPerformance() 실행하여 성능 확인\"",
+    "test:stress": "echo \"브라우저에서 stressTest() 실행하여 스트레스 테스트\"",
+    "test:compatibility": "echo \"브라우저에서 browserTest() 실행하여 호환성 확인\"",
+    "lint": "echo \"ESLint 설정 필요 - 향후 추가 예정\"",
+    "format": "echo \"Prettier 설정 필요 - 향후 추가 예정\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@mlc-ai/web-llm": "^0.2.79"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

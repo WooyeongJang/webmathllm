@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebMathLLM</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <h3>LLM-powered Math Solving, Right in Your Browser</h3>
+    
+        <!-- Status Section -->
+        <div id="status" class="status ready">
+            <div class="loading-spinner"></div>
+            <div id="statusText">Waiting for AI model loading.</div>
+            <div id="progressContainer" style="margin-top: 10px; display: none;">
+                <div style="background-color: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">
+                    <div id="progressBar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px;"></div>
+                </div>
+                <div id="progressText" style="margin-top: 5px; font-size: 12px; color: #6c757d;"></div>
+                <div id="timeEstimate" style="margin-top: 3px; font-size: 11px; color: #868e96;"></div>
+            </div>
+        </div>
+        
+        <!-- Model Selection -->
+        <div class="model-selection" style="margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">            
+            <div id="modelSelectSection">
+                <label for="modelSelect" style="margin-bottom: 8px;">Select AI Model:</label>
+                <select id="modelSelect" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; margin-bottom: 10px;">
+                    <option value="TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC">TinyLlama 1.1B (Stable lightweight model)</option>
+                    <option value="Qwen2.5-0.5B-Instruct-q4f32_1-MLC">Qwen2.5 0.5B (Ultra-fast compact model)</option>
+                    <option value="Qwen2.5-Math-1.5B-Instruct-q4f32_1-MLC">Qwen2.5-Math 1.5B (Math-specialized model)</option>
+                    <option value="Phi-3-mini-4k-instruct-q4f32_1-MLC">Phi-3 Mini (High-quality Microsoft model)</option>
+                    <option value="SmolLM2-1.7B-Instruct-q4f32_1-MLC">SmolLM2 1.7B (Efficient small model)</option>
+                </select>
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <button id="loadModelBtn" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                        🚀 Load AI Model
+                    </button>
+                </div>
+                <small style="color: #6c757d; display: block; text-align: center;">You need to load the AI model to start math calculations. (Takes about 1-2 minutes)</small>
+            </div>
+        </div>
+        
+        <!-- Input Section -->
+        <div class="input-section">
+            <label for="mathInput">Enter your math problem:</label>
+            <input type="text" id="mathInput" placeholder="Please load the AI model first" disabled>
+        </div>
+        
+        <!-- Main Action Buttons -->
+        <div style="text-align: center; margin-bottom: 20px;">
+            <button id="calculateBtn" disabled style="padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; margin: 5px; min-width: 150px;">Calculate</button>
+            <button id="clearBtn" style="background: #6c757d; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; margin: 5px; min-width: 150px;">
+                🗑️ Clear
+            </button>
+        </div>
+        
+        <!-- Secondary Action Buttons -->
+        <div style="text-align: center; margin-top: 20px;">
+            <button id="showExamplesBtn" style="background: #17a2b8; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; margin: 5px; min-width: 150px;">
+                📚 Examples
+            </button>
+            <button id="showHistoryBtn" style="background: #28a745; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; margin: 5px; min-width: 150px;">
+                📋 History
+            </button>
+            <button id="testProgressBtn" style="background: #17a2b8; display: none;">Test Progress</button>
+        </div>
+    </div>
+    
+    <!-- Result Modal -->
+    <div id="resultModal" class="modal-overlay result-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📊 Calculation Result</h2>
+            </div>
+            <div class="modal-body" id="resultModalBody">
+                <!-- Result content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button id="closeResultBtn" style="background: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Examples Modal -->
+    <div id="examplesModal" class="modal-overlay examples-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📚 Example Problems</h2>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center; color: #6c757d; margin-bottom: 20px;">
+                    Click any example to use it as your math problem
+                </p>
+                <div class="examples-grid" id="examplesGrid">
+                    <!-- Examples will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeExamplesBtn" style="background: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- History Modal -->
+    <div id="historyModal" class="modal-overlay history-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📋 Calculation History</h2>
+            </div>
+            <div class="modal-body">
+                <div id="historyList">
+                    <!-- History items will be populated here -->
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="clearHistoryBtn" style="background: #dc3545; color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                        🗑️ Clear All History
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeHistoryBtn" style="background: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="script.js"></script>
+</body>
+</html>

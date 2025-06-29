@@ -1,0 +1,98 @@
+<!-- Status Section Template -->
+<template id="status-template">
+    <div id="status" class="status loading">
+        <div class="loading-spinner"></div>
+        <div id="statusText">모델을 로딩 중입니다...</div>
+        <div id="progressContainer" style="margin-top: 10px; display: none;">
+            <div style="background-color: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">
+                <div id="progressBar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px;"></div>
+            </div>
+            <div id="progressText" style="margin-top: 5px; font-size: 12px; color: #6c757d;"></div>
+            <div id="timeEstimate" style="margin-top: 3px; font-size: 11px; color: #868e96;"></div>
+        </div>
+    </div>
+</template>
+
+<!-- Model Selection Template -->
+<template id="model-selection-template">
+    <div class="model-selection" style="margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
+        <div style="margin-bottom: 15px;">
+            <label style="display: flex; align-items: center; cursor: pointer;">
+                <input type="checkbox" id="devModeToggle" style="margin-right: 8px;">
+                <span>🚀 개발 모드 (빠른 Mock AI 사용)</span>
+            </label>
+            <small style="color: #6c757d; display: block; margin-top: 5px;">개발 모드에서는 실제 AI 대신 빠른 계산기를 사용합니다</small>
+        </div>
+        
+        <div id="modelSelectSection">
+            <label for="modelSelect" style="margin-bottom: 8px;">AI 모델 선택:</label>
+            <select id="modelSelect" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                <option value="TinyLlama-1.1B-Chat-v0.4-q4f16_1-1k">TinyLlama (빠름, 작은 크기)</option>
+                <option value="Llama-2-7b-chat-hf-q4f16_1">Llama-2 7B (느림, 높은 정확도)</option>
+                <option value="RedPajama-INCITE-Chat-3B-v1-q4f16_1">RedPajama 3B (중간)</option>
+            </select>
+            <small style="color: #6c757d; display: block; margin-top: 5px;">모델 변경 시 다시 로딩됩니다.</small>
+        </div>
+    </div>
+</template>
+
+<!-- Input Section Template -->
+<template id="input-section-template">
+    <div class="input-section">
+        <label for="mathInput">수학 문제를 입력하세요:</label>
+        <input type="text" id="mathInput" placeholder="예: 25 + 17 = ?" disabled>
+    </div>
+    
+    <div style="text-align: center;">
+        <button id="calculateBtn" disabled>계산하기</button>
+        <button id="clearBtn">지우기</button>
+        <button id="testProgressBtn" style="background: #17a2b8; display: none;">진행률 테스트</button>
+    </div>
+</template>
+
+<!-- Result Section Template -->
+<template id="result-template">
+    <div class="result" id="result">
+        여기에 결과가 표시됩니다.
+    </div>
+</template>
+
+<!-- History Section Template -->
+<template id="history-template">
+    <div class="history-section" id="historySection" style="display: none;">
+        <h3>📚 계산 히스토리</h3>
+        <div id="historyList"></div>
+        <button id="clearHistoryBtn" class="example-btn" style="margin-top: 10px;">히스토리 지우기</button>
+    </div>
+</template>
+
+<!-- Examples Section Template -->
+<template id="examples-template">
+    <div class="examples">
+        <h3>예제 문제들</h3>
+        <p>아래 버튼을 클릭해서 예제 문제를 시도해보세요:</p>
+        
+        <div style="margin: 15px 0;">
+            <label style="margin-bottom: 5px;">난이도별 예제:</label>
+            <select id="difficultySelect" style="width: 200px; padding: 5px; border-radius: 4px;">
+                <option value="basic">기초 (사칙연산)</option>
+                <option value="intermediate">중급 (백분율, 방정식)</option>
+                <option value="advanced">고급 (기하, 변환)</option>
+                <option value="all">전체 보기</option>
+            </select>
+        </div>
+        
+        <div class="example-buttons" id="exampleButtons">
+            <button class="example-btn basic" data-example="15 + 23 = ?">15 + 23 = ?</button>
+            <button class="example-btn basic" data-example="48 - 19 = ?">48 - 19 = ?</button>
+            <button class="example-btn basic" data-example="7 × 9 = ?">7 × 9 = ?</button>
+            <button class="example-btn basic" data-example="84 ÷ 12 = ?">84 ÷ 12 = ?</button>
+            <button class="example-btn intermediate" data-example="(25 + 15) × 3 = ?">(25 + 15) × 3 = ?</button>
+            <button class="example-btn intermediate" data-example="What is 30% of 120?">30% of 120?</button>
+            <button class="example-btn intermediate" data-example="Solve: 2x + 5 = 15">2x + 5 = 15</button>
+            <button class="example-btn intermediate" data-example="What is 8 factorial?">8! = ?</button>
+            <button class="example-btn advanced" data-example="Convert 2.5 hours to minutes">2.5시간을 분으로</button>
+            <button class="example-btn advanced" data-example="Find the area of a circle with radius 5">반지름 5인 원의 넓이</button>
+        </div>
+    </div>
+</template>
