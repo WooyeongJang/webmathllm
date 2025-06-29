@@ -4,7 +4,46 @@
 
 WebMathLLM은 최신 WebLLM 기술을 활용하여 브라우저에서 완전 로컬로 실행되는 혁신적인 AI 기반 수학 계산기입니다. 다양한 AI 모델을 지원하며 모듈화된 아키텍처로 확장성과 유지보수성을 제공합니다.
 
-## 📁 프로젝트 구조
+## � 빠른 시작 (Quick Start)
+
+### ⚡ **3분 만에 시작하기**
+
+1. **📦 의존성 설치**
+   ```bash
+   npm install
+   ```
+
+2. **🚀 서버 실행**
+   ```bash
+   npm start
+   # 또는
+   npm run serve
+   # 또는 Windows에서
+   start-server.bat
+   ```
+
+3. **🌐 브라우저 접속**
+   ```
+   http://localhost:8000
+   ```
+
+4. **🤖 AI 모델 선택 & 로드**
+   - 드롭다운에서 **Qwen2.5 0.5B** (가장 빠름) 선택
+   - **🚀 "Load AI Model"** 버튼 클릭
+   - 1분 정도 대기
+
+5. **🧮 수학 문제 입력**
+   ```
+   예시: "2 + 3 × 5 = ?"
+        "반지름 10인 원의 넓이"
+        "2x + 5 = 15"
+   ```
+
+> **💡 첫 사용 팁**: Qwen2.5 0.5B 모델이 가장 빠르게 로드됩니다. 복잡한 수학 문제는 Qwen2.5-Math 1.5B를 사용하세요!
+
+---
+
+## �📁 프로젝트 구조
 
 ```
 webmathllm/
@@ -269,7 +308,7 @@ webmathllm/
 ### 1. 저장소 클론
 ```bash
 git clone <repository-url>
-cd tinymath-llm
+cd webmathllm
 ```
 
 ### 2. 의존성 설치
@@ -558,7 +597,7 @@ TinyMathLLM은 오픈소스 프로젝트로 여러분의 기여를 환영합니�
 ```bash
 # 1. 프로젝트 클론
 git clone <repository-url>
-cd tinymath-llm
+cd webmathllm
 
 # 2. 의존성 설치
 npm install
